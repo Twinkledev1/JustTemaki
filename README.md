@@ -116,103 +116,108 @@ npm start
 
 ## 📊 Database Schema
 
-### Core Tables
+#### Dummy ER Diagram
 
-```sql
--- Users table
-CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  first_name VARCHAR(100),
-  last_name VARCHAR(100),
-  phone VARCHAR(20),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
+```mermaid
+erDiagram
+    users {
+        uuid id PK
+        varchar email UK
+        varchar password_hash
+        varchar first_name
+        varchar last_name
+        varchar phone
+        timestamp created_at
+        timestamp updated_at
+    }
 
--- Ingredients table
-CREATE TABLE ingredients (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(100) NOT NULL,
-  category VARCHAR(50), -- 'fish', 'vegetable', 'protein', etc.
-  price_cents INTEGER NOT NULL,
-  calories_per_serving INTEGER,
-  is_vegetarian BOOLEAN DEFAULT FALSE,
-  is_vegan BOOLEAN DEFAULT FALSE,
-  is_spicy BOOLEAN DEFAULT FALSE,
-  contains_gluten BOOLEAN DEFAULT FALSE,
-  image_url VARCHAR(255),
-  description TEXT,
-  is_available BOOLEAN DEFAULT TRUE,
-  created_at TIMESTAMP DEFAULT NOW()
-);
+    ingredients {
+        uuid id PK
+        varchar name
+        varchar category
+        integer price_cents
+        integer calories_per_serving
+        boolean is_vegetarian
+        boolean is_vegan
+        boolean is_spicy
+        boolean contains_gluten
+        varchar image_url
+        text description
+        boolean is_available
+        timestamp created_at
+    }
 
--- Sauces table
-CREATE TABLE sauces (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(100) NOT NULL,
-  spice_level INTEGER DEFAULT 0, -- 0-5 scale
-  price_cents INTEGER NOT NULL,
-  is_vegetarian BOOLEAN DEFAULT TRUE,
-  is_vegan BOOLEAN DEFAULT FALSE,
-  description TEXT,
-  is_available BOOLEAN DEFAULT TRUE
-);
+    sauces {
+        uuid id PK
+        varchar name
+        integer spice_level
+        integer price_cents
+        boolean is_vegetarian
+        boolean is_vegan
+        text description
+        boolean is_available
+    }
 
--- Boxes table
-CREATE TABLE boxes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id),
-  name VARCHAR(200), -- custom box names
-  total_price_cents INTEGER NOT NULL,
-  status VARCHAR(50) DEFAULT 'draft', -- 'draft', 'ordered', 'preparing', 'delivered'
-  created_at TIMESTAMP DEFAULT NOW()
-);
+    boxes {
+        uuid id PK
+        uuid user_id FK
+        varchar name
+        integer total_price_cents
+        varchar status
+        timestamp created_at
+    }
 
--- Temaki rolls table
-CREATE TABLE temaki_rolls (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  box_id UUID REFERENCES boxes(id) ON DELETE CASCADE,
-  position INTEGER, -- order within box
-  created_at TIMESTAMP DEFAULT NOW()
-);
+    temaki_rolls {
+        uuid id PK
+        uuid box_id FK
+        integer position
+        timestamp created_at
+    }
 
--- Roll ingredients (many-to-many)
-CREATE TABLE roll_ingredients (
-  roll_id UUID REFERENCES temaki_rolls(id) ON DELETE CASCADE,
-  ingredient_id UUID REFERENCES ingredients(id),
-  quantity INTEGER DEFAULT 1,
-  PRIMARY KEY (roll_id, ingredient_id)
-);
+    roll_ingredients {
+        uuid roll_id FK
+        uuid ingredient_id FK
+        integer quantity
+    }
 
--- Roll sauces (many-to-many)
-CREATE TABLE roll_sauces (
-  roll_id UUID REFERENCES temaki_rolls(id) ON DELETE CASCADE,
-  sauce_id UUID REFERENCES sauces(id),
-  PRIMARY KEY (roll_id, sauce_id)
-);
+    roll_sauces {
+        uuid roll_id FK
+        uuid sauce_id FK
+    }
 
--- Orders table
-CREATE TABLE orders (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id),
-  total_amount_cents INTEGER NOT NULL,
-  stripe_payment_intent_id VARCHAR(255),
-  status VARCHAR(50) DEFAULT 'pending',
-  delivery_address TEXT,
-  special_instructions TEXT,
-  created_at TIMESTAMP DEFAULT NOW()
-);
+    orders {
+        uuid id PK
+        uuid user_id FK
+        integer total_amount_cents
+        varchar stripe_payment_intent_id
+        varchar status
+        text delivery_address
+        text special_instructions
+        timestamp created_at
+    }
 
--- Order boxes (many-to-many)
-CREATE TABLE order_boxes (
-  order_id UUID REFERENCES orders(id),
-  box_id UUID REFERENCES boxes(id),
-  quantity INTEGER DEFAULT 1,
-  PRIMARY KEY (order_id, box_id)
-);
+    order_boxes {
+        uuid order_id FK
+        uuid box_id FK
+        integer quantity
+    }
+
+    %% Relationships
+    users ||--o{ boxes : "creates"
+    users ||--o{ orders : "places"
+    
+    boxes ||--o{ temaki_rolls : "contains"
+    boxes ||--o{ order_boxes : "included_in"
+    
+    temaki_rolls ||--o{ roll_ingredients : "has"
+    temaki_rolls ||--o{ roll_sauces : "has"
+    
+    ingredients ||--o{ roll_ingredients : "used_in"
+    sauces ||--o{ roll_sauces : "used_in"
+    
+    orders ||--o{ order_boxes : "contains"
 ```
+
 
 ## 📡 API Documentation
 
