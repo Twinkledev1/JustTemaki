@@ -59,7 +59,7 @@ POST /api/auth/forgot-password
 ## 🚀 Setup Instructions
 
 ### Prerequisites
-- Node.js 18+ and npm/yarn
+- Node.js 18+ and npm
 - PostgreSQL 14+
 - Git
 
