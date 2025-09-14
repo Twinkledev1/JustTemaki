@@ -49,11 +49,6 @@ JustTemaki is an e-commerce platform specializing in customizable Japanese hand 
 **Priority: Phase 1 - Essential for launch**
 
 #### Authentication System
-- [ ] User registration with email validation
-- [ ] Login/logout with JWT tokens
-- [ ] Password reset functionality
-- [ ] Protected routes middleware
-
 ```javascript
 // Example API endpoints
 POST /api/auth/register
