@@ -3,18 +3,18 @@
 A full-stack web application for ordering customizable temaki (hand roll) boxes with ingredient selection, pre-made combos, and comprehensive order management.
 
 ## 📋 Table of Contents
-- [Project Overview](#project-overview)
-- [Tech Stack](#tech-stack)
-- [Features Roadmap](#features-roadmap)
-- [Setup Instructions](#setup-instructions)
-- [API Documentation](#api-documentation)
-- [Database Schema](#database-schema)
-- [Development Guidelines](#development-guidelines)
-- [Deployment](#deployment)
+- [Project Overview](#-project-overview)
+- [Tech Stack](#-tech-stack)
+- [Features Roadmap](#-features-roadmap)
+- [Setup Instructions](#-setup-instructions)
+- [API Documentation](#-api-documentation)
+- [Database Schema](#-database-schema)
+- [Development Guidelines](#-development-guidelines)
+- [Deployment](#-deployment)
 
 ## 🎯 Project Overview
 
-Temaki Box Builder is an e-commerce platform specializing in customizable Japanese hand roll boxes. Users can create personalized boxes with at least 5 rolls, choose from pre-made combos, and manage their orders through a complete cart and checkout system.
+JustTemaki is an e-commerce platform specializing in customizable Japanese hand roll boxes. Users can create personalized boxes with at least 5 rolls, choose from pre-made combos, and manage their orders through a complete cart and checkout system.
 
 ### Key Business Rules
 - **Minimum Order**: Each box must contain at least 5 temaki rolls
@@ -33,16 +33,15 @@ Temaki Box Builder is an e-commerce platform specializing in customizable Japane
 
 ### Backend
 - **Runtime**: Node.js with Express.js
-- **Database**: PostgreSQL with Prisma ORM
+- **Database**: PostgreSQL/MongoDb
 - **Authentication**: JWT tokens
 - **Payments**: Stripe integration
 - **File Storage**: AWS S3 or Cloudinary (for images)
 
 ### DevOps
-- **Containerization**: Docker
 - **CI/CD**: GitHub Actions
-- **Hosting**: Vercel (frontend) + Railway/Heroku (backend)
-- **Database**: Supabase or ElephantSQL
+- **Hosting**: Render 
+- **Database**: Postgres Aiven or MongoDb Atlas
 
 ## 🗺 Features Roadmap
 
