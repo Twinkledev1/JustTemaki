@@ -68,8 +68,8 @@ POST /api/auth/forgot-password
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/temaki-box-builder.git
-cd temaki-box-builder
+git clone git@github.com:Twinkledev1/JustTemaki.git
+cd JustTemaki
 ```
 
 2. **Install dependencies**
