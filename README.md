@@ -1,4 +1,4 @@
-# 🍣 Temaki Box Builder
+# 🍣 JustTemaki
 
 A full-stack web application for ordering customizable temaki (hand roll) boxes with ingredient selection, pre-made combos, and comprehensive order management.
 
