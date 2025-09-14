@@ -25,9 +25,9 @@ JustTemaki is an e-commerce platform specializing in customizable Japanese hand 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Framework**: React 18+ with TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: Redux Toolkit or Zustand
+- **Framework**: React 18+ with Java Script (Vanilla JS)
+- **Styling**:##: CSS3
+- **Markup**: HTML5 
 - **Forms**: React Hook Form with Zod validation
 - **HTTP Client**: Axios or React Query
 
@@ -36,7 +36,6 @@ JustTemaki is an e-commerce platform specializing in customizable Japanese hand 
 - **Database**: PostgreSQL/MongoDb
 - **Authentication**: JWT tokens
 - **Payments**: Stripe integration
-- **File Storage**: AWS S3 or Cloudinary (for images)
 
 ### DevOps
 - **CI/CD**: GitHub Actions
