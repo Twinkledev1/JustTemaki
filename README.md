@@ -7,10 +7,6 @@ A full-stack web application for ordering customizable temaki (hand roll) boxes 
 - [Tech Stack](#-tech-stack)
 - [Features Roadmap](#-features-roadmap)
 - [Setup Instructions](#-setup-instructions)
-- [API Documentation](#-api-documentation)
-- [Database Schema](#-database-schema)
-- [Development Guidelines](#-development-guidelines)
-- [Deployment](#-deployment)
 
 ## 🎯 Project Overview
 
